@@ -1,0 +1,108 @@
+feature_name
+year
+debt_level
+herd_size
+crop_production
+cmb
+conflict_fatalities
+conflict_incidents
+goat_price
+ndvi
+rainfall
+rice_price
+river_level
+sorghum_price
+water_price
+cmb_lag1
+cmb_lag2
+cmb_lag3
+cmb_lag4
+cmb_lag5
+cmb_lag6
+conflict_fatalities_lag1
+conflict_fatalities_lag2
+conflict_fatalities_lag3
+conflict_fatalities_lag4
+conflict_fatalities_lag5
+conflict_fatalities_lag6
+conflict_incidents_lag1
+conflict_incidents_lag2
+conflict_incidents_lag3
+conflict_incidents_lag4
+conflict_incidents_lag5
+conflict_incidents_lag6
+goat_price_lag1
+goat_price_lag2
+goat_price_lag3
+goat_price_lag4
+goat_price_lag5
+goat_price_lag6
+ndvi_lag1
+ndvi_lag2
+ndvi_lag3
+ndvi_lag4
+ndvi_lag5
+ndvi_lag6
+rainfall_lag1
+rainfall_lag2
+rainfall_lag3
+rainfall_lag4
+rainfall_lag5
+rainfall_lag6
+rice_price_lag1
+rice_price_lag2
+rice_price_lag3
+rice_price_lag4
+rice_price_lag5
+rice_price_lag6
+river_level_lag1
+river_level_lag2
+river_level_lag3
+river_level_lag4
+river_level_lag5
+river_level_lag6
+sorghum_price_lag1
+sorghum_price_lag2
+sorghum_price_lag3
+sorghum_price_lag4
+sorghum_price_lag5
+sorghum_price_lag6
+water_price_lag1
+water_price_lag2
+water_price_lag3
+water_price_lag4
+water_price_lag5
+water_price_lag6
+river_level_available
+river_level_lag1_available
+river_level_lag2_available
+river_level_lag3_available
+river_level_lag4_available
+river_level_lag5_available
+river_level_lag6_available
+crop_production_available
+herd_size_available
+ndvi_anomaly
+rainfall_anomaly
+conflict_incidents_anomaly
+goat_price_anomaly
+water_price_anomaly
+cmb_anomaly
+livelihood_zone_corrected_Bay Agropastoral
+livelihood_zone_corrected_Central/NE Hawd Pastoral
+livelihood_zone_corrected_Coastal Deeh Pastoral and Fishing
+livelihood_zone_corrected_East Golis Pastoral
+livelihood_zone_corrected_Gedo Pastoral
+livelihood_zone_corrected_Gedo Riverine
+livelihood_zone_corrected_Guban Pastoral
+livelihood_zone_corrected_NE Northern Inland Pastoral
+livelihood_zone_corrected_NW Agropastoral
+livelihood_zone_corrected_NW Hawd Pastoral
+livelihood_zone_corrected_NW Northern Inland Pastoral
+livelihood_zone_corrected_Shabelle Agropastoral
+livelihood_zone_corrected_Shabelle Riverine
+livelihood_zone_corrected_West Golis Pastoral
+livelihood_system_Pastoral
+livelihood_system_Pastoral and Fishing
+livelihood_system_Riverine
+season_Gu
