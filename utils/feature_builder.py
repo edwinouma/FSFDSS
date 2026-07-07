@@ -21,27 +21,44 @@ hhs_features = joblib.load(
     "models/hhs_features.pkl"
 )
 
-# ----------------------------------------------------------
-# LOAD ALL MODEL COLUMNS
-# ----------------------------------------------------------
+# ==========================================================
+# LOAD MODEL COLUMNS
+# ==========================================================
 
-all_model_columns = joblib.load(
-    "models/all_model_columns.pkl"
+fcs_model_columns = joblib.load(
+    "models/fcs_model_columns.pkl"
+)
+
+rcsi_model_columns = joblib.load(
+    "models/rcsi_model_columns.pkl"
+)
+
+hhs_model_columns = joblib.load(
+    "models/hhs_model_columns.pkl"
 )
 
 # ==========================================================
 # CREATE FEATURES
 # ==========================================================
 
-def create_features(model_inputs):
+def create_features(
+    model_inputs,
+    outcome
+):
 
     """
     Converts forecast inputs into the feature dataframe
-    expected by the trained models.
+    expected by the requested trained model.
 
     Parameters
     ----------
     model_inputs : dict
+
+    outcome : str
+
+        "fcs"
+        "rcsi"
+        "hhs"
 
     Returns
     -------
@@ -95,15 +112,45 @@ def create_features(model_inputs):
         )
 
     # ------------------------------------------------------
-    # ALIGN WITH TRAINING COLUMNS
+    # ALIGN TO MODEL-SPECIFIC COLUMNS
     # ------------------------------------------------------
 
-    df = df.reindex(
+    if outcome.lower() == "fcs":
 
-        columns=all_model_columns,
+        df = df.reindex(
 
-        fill_value=0
+            columns=fcs_model_columns,
 
-    )
+            fill_value=0
+
+        )
+
+    elif outcome.lower() == "rcsi":
+
+        df = df.reindex(
+
+            columns=rcsi_model_columns,
+
+            fill_value=0
+
+        )
+
+    elif outcome.lower() == "hhs":
+
+        df = df.reindex(
+
+            columns=hhs_model_columns,
+
+            fill_value=0
+
+        )
+
+    else:
+
+        raise ValueError(
+
+            f"Unknown outcome: {outcome}"
+
+        )
 
     return df

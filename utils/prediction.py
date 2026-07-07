@@ -34,7 +34,6 @@ from utils.feature_builder import (
 
 )
 
-
 # ==========================================================
 # LOAD TRAINED MODELS
 # ==========================================================
@@ -44,7 +43,6 @@ fcs_model = joblib.load(FCS_MODEL_PATH)
 rcsi_model = joblib.load(RCSI_MODEL_PATH)
 
 hhs_model = joblib.load(HHS_MODEL_PATH)
-
 
 # ==========================================================
 # MODEL STATUS
@@ -60,7 +58,6 @@ def get_model_status():
 
     }
 
-
 # ==========================================================
 # GENERIC PREDICTION
 # ==========================================================
@@ -69,7 +66,8 @@ def predict_model(
 
     model,
     feature_list,
-    model_inputs
+    model_inputs,
+    outcome
 
 ):
 
@@ -77,18 +75,33 @@ def predict_model(
     Generic prediction function.
     """
 
+    # ------------------------------------------------------
+    # BUILD FEATURES FOR THE REQUESTED MODEL
+    # ------------------------------------------------------
+
     features = create_features(
 
-        model_inputs
+        model_inputs,
+
+        outcome
 
     )
+
+    # ------------------------------------------------------
+    # KEEP ONLY REQUIRED FEATURES
+    # ------------------------------------------------------
 
     features = features.reindex(
 
         columns=feature_list,
+
         fill_value=0
 
     )
+
+    # ------------------------------------------------------
+    # PREDICT
+    # ------------------------------------------------------
 
     prediction = model.predict(
 
@@ -97,7 +110,6 @@ def predict_model(
     )[0]
 
     return float(prediction)
-
 
 # ==========================================================
 # INDIVIDUAL PREDICTIONS
@@ -108,8 +120,12 @@ def predict_fcs(model_inputs):
     return predict_model(
 
         fcs_model,
+
         fcs_features,
-        model_inputs
+
+        model_inputs,
+
+        "fcs"
 
     )
 
@@ -119,8 +135,12 @@ def predict_rcsi(model_inputs):
     return predict_model(
 
         rcsi_model,
+
         rcsi_features,
-        model_inputs
+
+        model_inputs,
+
+        "rcsi"
 
     )
 
@@ -130,11 +150,14 @@ def predict_hhs(model_inputs):
     return predict_model(
 
         hhs_model,
+
         hhs_features,
-        model_inputs
+
+        model_inputs,
+
+        "hhs"
 
     )
-
 
 # ==========================================================
 # COMPLETE FORECAST
@@ -155,9 +178,7 @@ def predict_all(
 
     Returns
     -------
-    Dictionary
-
-    Contains
+    Dictionary containing
 
     Forecast metadata
 
@@ -168,9 +189,9 @@ def predict_all(
 
     results = {
 
-        # ----------------------------------------------
-        # Forecast Metadata
-        # ----------------------------------------------
+        # --------------------------------------------------
+        # FORECAST METADATA
+        # --------------------------------------------------
 
         "Forecast Year":
 
@@ -204,9 +225,9 @@ def predict_all(
 
             ),
 
-        # ----------------------------------------------
-        # Data References
-        # ----------------------------------------------
+        # --------------------------------------------------
+        # DATA REFERENCES
+        # --------------------------------------------------
 
         "Monthly Data Used":
 
@@ -216,9 +237,9 @@ def predict_all(
 
             seasonal_reference,
 
-        # ----------------------------------------------
-        # Forecast Results
-        # ----------------------------------------------
+        # --------------------------------------------------
+        # FORECASTS
+        # --------------------------------------------------
 
         "FCS":
 
@@ -248,7 +269,6 @@ def predict_all(
 
     return results
 
-
 # ==========================================================
 # BASELINE VS SCENARIO
 # ==========================================================
@@ -269,7 +289,9 @@ def compare_predictions(
     baseline = predict_all(
 
         baseline_inputs,
+
         monthly_reference,
+
         seasonal_reference
 
     )
@@ -277,7 +299,9 @@ def compare_predictions(
     scenario = predict_all(
 
         scenario_inputs,
+
         monthly_reference,
+
         seasonal_reference
 
     )

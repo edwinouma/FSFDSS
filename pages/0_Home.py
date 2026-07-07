@@ -1,4 +1,21 @@
 import streamlit as st
+from PIL import Image
+
+# ==========================================================
+# PAGE CONFIGURATION
+# ==========================================================
+
+# ==========================================================
+# ASSETS
+# ==========================================================
+
+ASSETS = {
+
+    "logo": "assets/fsfdss_logo.png",
+    "banner": "assets/fsfdss_banner.png",
+    "jkuat": "assets/jkuat_logo.png"
+
+}
 
 # ==========================================================
 # PAGE CONFIGURATION
@@ -8,132 +25,32 @@ st.set_page_config(
 
     page_title="FSFDSS",
 
-    page_icon="🌍",
+    page_icon=ASSETS["logo"],
 
     layout="wide"
 
 )
 
 # ==========================================================
-# HERO BANNER
+# LOAD BRANDING
 # ==========================================================
 
-st.markdown(
+banner = Image.open(
 
-"""
-<div style="
-background: linear-gradient(90deg,#0B4F6C,#1E88E5);
-padding:35px;
-border-radius:12px;
-margin-bottom:25px;
-">
-
-<h1 style="
-color:white;
-text-align:center;
-margin-bottom:5px;
-">
-
-🌍 Food Security Forecasting and Decision Support System
-
-</h1>
-
-<h3 style="
-color:#E8F4FD;
-text-align:center;
-margin-top:0px;
-">
-
-Machine Learning for Food Security Forecasting,
-Early Warning and Decision Support
-
-</h3>
-
-<p style="
-color:white;
-font-size:18px;
-text-align:center;
-">
-
-Forecasting Food Consumption Score (FCS),
-Reduced Coping Strategy Index (rCSI),
-and Household Hunger Scale (HHS)
-across Somalia's livelihood zones.
-
-</p>
-
-</div>
-
-""",
-
-unsafe_allow_html=True
+    ASSETS["banner"]
 
 )
 
 # ==========================================================
-# QUICK OVERVIEW
+# PLATFORM BRANDING
 # ==========================================================
 
-st.info(
+with st.container(border=True):
+    st.image(
 
-"""
-### Welcome to FSFDSS
+        banner,
 
-The Food Security Forecasting and Decision Support System (FSFDSS)
-is an integrated web-based platform developed to support evidence-based
-food security analysis through machine learning.
-
-The platform combines historical food security data with environmental,
-market, conflict and livelihood indicators to generate transparent,
-interpretable and operational forecasts for Somalia.
-"""
-
-)
-
-
-# ==========================================================
-# PLATFORM HIGHLIGHTS
-# ==========================================================
-
-c1, c2, c3, c4 = st.columns(4)
-
-with c1:
-
-    st.metric(
-
-        "Forecast Indicators",
-
-        "3"
-
-    )
-
-with c2:
-
-    st.metric(
-
-        "Analytical Modules",
-
-        "7"
-
-    )
-
-with c3:
-
-    st.metric(
-
-        "Machine Learning",
-
-        "XGBoost"
-
-    )
-
-with c4:
-
-    st.metric(
-
-        "Model Interpretation",
-
-        "SHAP"
+        width=2000
 
     )
 
@@ -356,15 +273,15 @@ Data Sources
 
 <div class="workflow-body">
 
-IPC<br>
+FSNAU<br>
 
-Climate<br>
+CHIRPS<br>
 
-Markets<br>
+ACLED<br>
 
-Conflict<br>
+FEWS NET<br>
 
-Livelihood
+IPC
 
 </div>
 
@@ -520,7 +437,7 @@ st.header("🧩 Platform Modules")
 
 st.markdown(
     """
-    FSFDSS consists of seven integrated analytical modules designed to
+    FSFDSS consists of six integrated analytical modules designed to
     support food security monitoring, forecasting and decision-making.
     """
 )
@@ -529,35 +446,17 @@ st.markdown(
 # ROW 1
 # ==========================================================
 
-col1, col2 = st.columns(2)
+with st.container(border=True):
 
-with col1:
+    st.subheader("📊 Dashboard")
 
-    with st.container(border=True):
-        st.subheader("📊 Executive Dashboard")
-
-        st.write(
-            """
-    Provides a national overview of current food security conditions,
-    including key outcome indicators, dominant drivers and strategic
-    decision-support summaries.
-    """
-        )
-
-with col2:
-
-    with st.container(border=True):
-
-        st.subheader("🔮 Baseline Forecasting")
-
-        st.write(
-            """
-    Generates baseline machine learning forecasts for
-    Food Consumption Score (FCS), Reduced Coping Strategy
-    Index (rCSI) and Household Hunger Scale (HHS) using
-    trained XGBoost forecasting models.
-    """
-        )
+    st.write(
+        """
+Provides a national overview of current food security conditions,
+including key outcome indicators, dominant drivers and strategic
+decision-support summaries.
+"""
+    )
 
 # ==========================================================
 # ROW 2
@@ -584,7 +483,7 @@ with col4:
 
     with st.container(border=True):
 
-        st.subheader("📈 Historical Trends")
+        st.subheader("📈 Historical Monitoring")
 
         st.write(
             """
@@ -604,7 +503,7 @@ with col5:
 
     with st.container(border=True):
 
-        st.subheader("🔍 Key Drivers")
+        st.subheader("🧠 Driver Analysis (SHAP)")
 
         st.write(
             """
@@ -634,7 +533,7 @@ with col6:
 
 with st.container(border=True):
 
-    st.subheader("📄 Automated Situation Report")
+    st.subheader("📄 Situation & Forecast Report")
 
     st.write(
         """
@@ -684,23 +583,22 @@ with col1:
     )
 
 with col2:
-
     st.success(
         """
-**Climate, Markets & Conflict**
-
-• Rainfall
-
-• NDVI
-
-• River Levels
-
-• Food & Livestock Prices
-
-• Cost of Minimum Basket (CMB)
-
-• Conflict Incidents & Fatalities
-"""
+        **Climate, Markets & Conflict**
+    
+        • CHIRPS Rainfall
+    
+        • NDVI
+    
+        • SWALIM River Levels
+    
+        • FSNAU & FEWS NET Market Prices
+    
+        • Cost of Minimum Basket (CMB)
+    
+        • ACLED Conflict Incidents
+        """
     )
 
 st.markdown("---")
@@ -721,13 +619,13 @@ with left:
 
 • XGBoost Regression
 
-• Feature Selection
+• SHAP Feature Selection
 
-• Lag-Based Predictors
+• Lag Feature Engineering
 
-• Cross-Validation
+• National Forecast Generation
 
-• Hyperparameter Optimisation
+• Decision-Support Forecasting
 """
     )
 
@@ -812,7 +710,7 @@ with info3:
 
         "Decision Support Modules",
 
-        "7"
+        "6"
 
     )
 
@@ -833,15 +731,41 @@ such as the Integrated Food Security Phase Classification (IPC).
 # FOOTER
 # ==========================================================
 
-st.caption(
-    """
-**Food Security Forecasting and Decision Support System (FSFDSS)**
+st.markdown("---")
+
+col1, col2, col3 = st.columns([1,2,2])
+
+with col1:
+    st.image(
+
+        ASSETS["jkuat"],
+
+        width=110
+
+    )
+
+with col2:
+
+    st.markdown("""
+### Food Security Forecasting and Decision Support System (FSFDSS)
+
+Developed as part of a Master of Science Research Project
+
+**Jomo Kenyatta University of Agriculture and Technology**
+
+Developer: **Edwin Ouma**
 
 Version 1.0
+""")
 
-Developed as part of a Master of Science research project on
-machine learning for food security forecasting in Somalia.
+with col3:
 
-© 2026
-"""
-)
+    st.markdown("""
+### Data Sources
+
+- FSNAU
+- CHIRPS
+- ACLED
+- FEWS NET
+- SWALIM
+""")

@@ -164,25 +164,6 @@ with st.expander(
 
     )
 
-st.info(
-
-    f"Latest seasonal livelihood information loaded from **{seasonal['reference_label']}**."
-
-)
-
-st.info(
-    """
-The baseline scenario is automatically constructed using:
-
-• Historical monthly monitoring data
-
-• Latest seasonal livelihood information
-
-Observed food security outcomes are not displayed because
-the selected forecast season has not yet occurred.
-"""
-)
-
 # ==========================================================
 # BASELINE CONDITIONS
 # ==========================================================
@@ -298,9 +279,15 @@ with st.expander("⚔ Conflict", expanded=True):
 
     )
 
+
 # ----------------------------------------------------------
 # LIVELIHOOD
 # ----------------------------------------------------------
+st.info(
+
+    f"Latest seasonal livelihood information loaded from **{seasonal['reference_label']}**."
+
+)
 
 with st.expander("🐄 Livelihood", expanded=True):
 
@@ -562,12 +549,6 @@ baseline_inputs = build_forecast_inputs(
     seasonal["crop_production"]
 
 )
-
-st.markdown("### DEBUG")
-
-st.write("Baseline input keys")
-
-st.write(sorted(baseline_inputs.keys()))
 
 # ==========================================================
 # BUILD SCENARIO
@@ -921,18 +902,6 @@ with st.expander("Show All Variables"):
 # ==========================================================
 
 st.markdown("---")
-
-st.header("📈 Prediction Comparison")
-
-st.write("Rainfall slider:", rainfall_change)
-st.write("NDVI slider:", ndvi_change)
-st.write("Goat slider:", goat_change)
-
-st.write("Baseline rainfall lag1:", baseline_inputs["rainfall_lag1"])
-st.write("Scenario rainfall lag1:", scenario_inputs["rainfall_lag1"])
-
-st.write("Baseline goat lag1:", baseline_inputs["goat_price_lag1"])
-st.write("Scenario goat lag1:", scenario_inputs["goat_price_lag1"])
 
 results = compare_predictions(
 

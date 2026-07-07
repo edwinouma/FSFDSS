@@ -300,7 +300,7 @@ fig.update_layout(
 
     title=dict(
 
-        text=f"{indicator.upper()} Historical Trend",
+        text=f"{indicator.upper()} Historical Monitoring",
 
         x=0.5,
 

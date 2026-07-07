@@ -7,7 +7,7 @@ from utils.data_loader import load_data
 # PAGE TITLE
 # ==========================================================
 
-st.title("📊 Executive Dashboard")
+st.title("📊 Dashboard")
 
 st.markdown(
     """
